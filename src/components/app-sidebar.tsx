@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { AudioWaveform, BookOpen, Bot, Command, Frame, GalleryVerticalEnd, Map, PieChart, Settings2, SquareTerminal } from "lucide-react"
+import { AudioWaveform, CreditCard ,BookOpen, Bot, Command, Frame, GalleryVerticalEnd, Map, PieChart, Settings2, Gauge } from "lucide-react"
 
 import { NavMain } from "@/components/nav-main"
 import { NavProjects } from "@/components/nav-projects"
@@ -35,32 +35,38 @@ const data = {
   ],
   navMain: [
     {
-      title: "Playground",
+      title: "Dashboard",
+      url: "/dashboard",
+      icon: Gauge,
+      isActive: false,
+    },
+    {
+      title: "Payments",
       url: "#",
-      icon: SquareTerminal,
+      icon: CreditCard,
       isActive: true,
       items: [
         {
-          title: "History",
+          title: "Success",
           url: "#",
         },
         {
-          title: "Starred",
+          title: "Failed",
           url: "#",
         },
         {
-          title: "Settings",
+          title: "Pending",
           url: "#",
         },
       ],
     },
     {
-      title: "Models",
+      title: "Content",
       url: "#",
       icon: Bot,
       items: [
         {
-          title: "Genesis",
+          title: "Create",
           url: "#",
         },
         {
@@ -116,6 +122,9 @@ const data = {
         {
           title: "Limits",
           url: "#",
+        },{
+          title: "Dashboard Settings",
+          url: "#",
         },
       ],
     },
@@ -139,14 +148,19 @@ const data = {
   ],
 }
 
-export function AppSidebar({...props }: React.ComponentProps<typeof Sidebar>) {
+
+interface AppSidebarProps extends React.ComponentProps<typeof Sidebar> {
+  navChange?: (url: string) => void
+}
+
+export function AppSidebar({ navChange = () => {}, ...props }: AppSidebarProps) {
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
         <TeamSwitcher teams={data.teams} />
       </SidebarHeader>
       <SidebarContent>
-        <NavMain items={data.navMain} />
+        <NavMain items={data.navMain} onItemClick={navChange}/>
         <NavProjects projects={data.projects} />
       </SidebarContent>
       <SidebarFooter>

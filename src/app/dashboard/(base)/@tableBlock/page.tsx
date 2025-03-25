@@ -150,24 +150,7 @@ export default function DataTableDemo() {
     React.useState<VisibilityState>({})
   const [rowSelection, setRowSelection] = React.useState({})
 
-  const table = useReactTable({
-    data,
-    columns,
-    onSortingChange: setSorting,
-    onColumnFiltersChange: setColumnFilters,
-    getCoreRowModel: getCoreRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
-    getSortedRowModel: getSortedRowModel(),
-    getFilteredRowModel: getFilteredRowModel(),
-    onColumnVisibilityChange: setColumnVisibility,
-    onRowSelectionChange: setRowSelection,
-    state: {
-      sorting,
-      columnFilters,
-      columnVisibility,
-      rowSelection,
-    },
-  })
+  const table = useReactTable({data,columns,onSortingChange: setSorting,onColumnFiltersChange: setColumnFilters,getCoreRowModel: getCoreRowModel(),getPaginationRowModel: getPaginationRowModel(),getSortedRowModel: getSortedRowModel(),getFilteredRowModel: getFilteredRowModel(),onColumnVisibilityChange: setColumnVisibility,onRowSelectionChange: setRowSelection,state: {sorting,columnFilters,columnVisibility,rowSelection,},})
 
   return (
     <div className="w-full">
